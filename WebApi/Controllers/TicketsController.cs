@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiApplication.Filters;
 using WebApiApplication.Models;
 
 namespace WebApiApplication.Controllers
@@ -23,7 +24,7 @@ namespace WebApiApplication.Controllers
             // Data Validation
 
             // Application Logic / Data
-            // Test
+            
             // Format Output Data
 
             // Exception Handling 
@@ -37,7 +38,16 @@ namespace WebApiApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Ticket ticket)
+
+        public IActionResult PostV1([FromBody] Ticket ticket)
+        {
+            return Ok(ticket);
+        }
+
+        [HttpPost]
+        [Route ("/api/v2/tickets")]
+        [Ticket_ValidateDatesActionFilter]
+        public IActionResult PostV2([FromBody] Ticket ticket)
         {
             return Ok(ticket);
         }

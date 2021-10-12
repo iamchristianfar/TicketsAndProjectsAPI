@@ -6,7 +6,6 @@ C:\Users\chris\source\repos\WebAPICore\WebApiApplication\bin\Debug\netcoreapp3.1
 C:\Users\chris\source\repos\WebAPICore\WebApiApplication\bin\Debug\netcoreapp3.1\WebApiApplication.runtimeconfig.dev.json
 C:\Users\chris\source\repos\WebAPICore\WebApiApplication\bin\Debug\netcoreapp3.1\WebApiApplication.dll
 C:\Users\chris\source\repos\WebAPICore\WebApiApplication\bin\Debug\netcoreapp3.1\WebApiApplication.pdb
-C:\Users\chris\source\repos\WebAPICore\WebApiApplication\obj\Debug\netcoreapp3.1\WebApiApplication.csprojAssemblyReference.cache
 C:\Users\chris\source\repos\WebAPICore\WebApiApplication\obj\Debug\netcoreapp3.1\WebApiApplication.AssemblyInfoInputs.cache
 C:\Users\chris\source\repos\WebAPICore\WebApiApplication\obj\Debug\netcoreapp3.1\WebApiApplication.AssemblyInfo.cs
 C:\Users\chris\source\repos\WebAPICore\WebApiApplication\obj\Debug\netcoreapp3.1\WebApiApplication.csproj.CoreCompileInputs.cache

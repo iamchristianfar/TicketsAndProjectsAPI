@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chris\\source\\repos\\WebAPICore\\WebApiApplication\\WebApiApplication.csproj",
-      "projectName": "WebApiApplication",
-      "projectPath": "C:\\Users\\chris\\source\\repos\\WebAPICore\\WebApiApplication\\WebApiApplication.csproj",
+      "projectUniqueName": "C:\\Users\\chris\\source\\repos\\WebAPICore\\WebApi\\WebApi.csproj",
+      "projectName": "WebApi",
+      "projectPath": "C:\\Users\\chris\\source\\repos\\WebAPICore\\WebApi\\WebApi.csproj",
       "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chris\\source\\repos\\WebAPICore\\WebApiApplication\\obj\\",
+      "outputPath": "C:\\Users\\chris\\source\\repos\\WebAPICore\\WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",

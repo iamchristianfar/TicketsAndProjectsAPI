@@ -1,0 +1,12 @@
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\bin\Debug\netstandard2.0\DataStore.EF.deps.json
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\bin\Debug\netstandard2.0\DataStore.EF.dll
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\bin\Debug\netstandard2.0\DataStore.EF.pdb
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\bin\Debug\netstandard2.0\Core.dll
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\bin\Debug\netstandard2.0\Core.pdb
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\obj\Debug\netstandard2.0\DataStore.EF.csprojAssemblyReference.cache
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\obj\Debug\netstandard2.0\DataStore.EF.AssemblyInfoInputs.cache
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\obj\Debug\netstandard2.0\DataStore.EF.AssemblyInfo.cs
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\obj\Debug\netstandard2.0\DataStore.EF.csproj.CoreCompileInputs.cache
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\obj\Debug\netstandard2.0\DataStore.EF.csproj.CopyComplete
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\obj\Debug\netstandard2.0\DataStore.EF.dll
+C:\Users\chris\source\repos\WebAPICore\DataStore.EF\obj\Debug\netstandard2.0\DataStore.EF.pdb

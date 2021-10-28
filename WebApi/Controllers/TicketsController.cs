@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Models;
+using DataStore.EF;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiApplication.Filters;
-using WebApiApplication.Models;
+
 
 namespace WebApiApplication.Controllers
 {
@@ -12,57 +14,75 @@ namespace WebApiApplication.Controllers
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly BugsContext db;
+
+        public TicketsController(BugsContext db)
         {
-            // Authentication and Authorization
+            this.db = db;
+        }
 
-            // Generic Validation
-
-            // Retrive the Input Data
-
-            // Data Validation
-
-            // Application Logic / Data
-            
-            // Format Output Data
-
-            // Exception Handling 
-            return Ok("Reading all the tickets");
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await db.Tickets.ToListAsync());
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok($"Reading ticket #{id}.");
+            var ticket = await db.Tickets.FindAsync(id);
+            if (ticket == null)
+                return NotFound();
+
+            return Ok(ticket);
         }
+
 
         [HttpPost]
 
-        public IActionResult PostV1([FromBody] Ticket ticket)
+        public async Task<IActionResult> Post([FromBody] Ticket ticket)
         {
-            return Ok(ticket);
+            db.Tickets.Add(ticket);
+            await db.SaveChangesAsync();
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = ticket.TicketId },
+                ticket
+                );
         }
 
-        [HttpPost]
-        [Route ("/api/v2/tickets")]
-        [Ticket_ValidateDatesActionFilter]
-        public IActionResult PostV2([FromBody] Ticket ticket)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Ticket ticket)
         {
-            return Ok(ticket);
-        }
+            if (id != ticket.TicketId)
+                return BadRequest();
+            db.Entry(ticket).State = EntityState.Modified;
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                if (await db.Tickets.FindAsync(id) == null)
+                    return NotFound();
+                throw;
+            }
 
-        [HttpPut]
-        public IActionResult Put([FromBody] Ticket ticket)
-        {
-            return Ok(ticket);
+            return NoContent();
 
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return Ok($"Deleting ticket #{id}.");
+            var ticket = await db.Tickets.FindAsync(id);
+            if (ticket == null) return NotFound();
+
+            db.Tickets.Remove(ticket);
+            await db.SaveChangesAsync();
+
+            return Ok(ticket);
 
         }
     }

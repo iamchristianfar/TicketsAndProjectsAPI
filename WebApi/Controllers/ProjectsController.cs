@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Models;
+using DataStore.EF;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiApplication.Models;
+
 
 namespace WebApiApplication.Controllers
 {
@@ -11,68 +14,83 @@ namespace WebApiApplication.Controllers
     [Route("api/[controller]")]
     public class ProjectsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly BugsContext db;
+
+        public ProjectsController(BugsContext db)
         {
-            return Ok("Reading all the project.");
+            this.db = db;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await db.Projects.ToListAsync());
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok($"Reading project #{id}.");
+            var project = await db.Projects.FindAsync(id);
+            if (project == null)
+                return NotFound();
 
+            return Ok(project);
         }
-
-        /// <summary>
-        ///   api/projects/{pid}/tickets?tid={tid}
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// 
-        /*  
-           [HttpGet]
-           [Route("/api/projects/{pid}/tickets")]
-           public IActionResult GetProjectTicket([FromQuery] Ticket ticket)
-           {
-               if (ticket == null) return BadRequest("Parameters are not provided properly");
-
-               if (ticket.TicketId== 0)
-                   return Ok($"Reading all the tickest belong to project #{ticket.ProjectId}");
-               else
-                   return Ok($"Reading project #{ticket.ProjectId}, ticket #{ticket.TicketId}, title: {ticket.Title}, description: {ticket.Description}");
-           }
-        */
 
 
         [HttpGet]
         [Route("/api/projects/{pid}/tickets")]
-        public IActionResult GetProjectTicket(int pId, [FromQuery] int tId)
+        public async Task<IActionResult> GetProjectTickets(int pId)
         {
+            var tickets = await db.Tickets.Where(t => t.ProjectId == pId).ToListAsync();
+            if (tickets == null || tickets.Count <= 0)
+                return NotFound();
 
-            if (tId == 0)
-                return Ok($"Reading all the tickest belong to project #{pId}");
-            else
-                return Ok($"Reading project #{pId}, ticket #{tId}");
+            return Ok(tickets);
         }
 
         [HttpPost]
-        public IActionResult Post(int id)
+        public async Task<IActionResult> Post([FromBody] Project project)
         {
-            return Ok($"Reading project ${id}.");
+            db.Projects.Add(project);
+            await db.SaveChangesAsync();
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = project.ProjectId },
+                project
+                );
         }
 
-        [HttpPut]
-        public IActionResult Put()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Project project)
         {
-            return Ok("Updating a project");
+            if (id != project.ProjectId)
+                return BadRequest();
+            db.Entry(project).State = EntityState.Modified;
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                if (await db.Projects.FindAsync(id) == null)
+                    return NotFound();
+                throw;
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return Ok($"Deleting project #{id}.");
+            var project = await db.Projects.FindAsync(id);
+            if (project == null) return NotFound();
 
+            db.Projects.Remove(project);
+            await db.SaveChangesAsync();
+
+            return Ok(project);
         }
     }
 }

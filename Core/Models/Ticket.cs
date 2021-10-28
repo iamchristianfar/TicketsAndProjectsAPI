@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.ValidationAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -16,8 +17,11 @@ namespace Core.Models
         public string Description { get; set; }
         [StringLength(50)]
         public string Owner { get; set; }
-
+        [Ticket_EnsureReporDatePresent]
         public DateTime? ReportDate { get; set; }
+        [Ticket_EnsureDueDateAfterReportDate]
+        [Ticket_EnsureFutureDueDateOnCreation]
+        [Ticket_EnsureDueDatePresent]
         public DateTime? DueDate { get; set; }
         public Project Project { get; set; }
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace WebApiApplication.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
@@ -36,7 +37,6 @@ namespace WebApiApplication.Controllers
 
             return Ok(ticket);
         }
-
 
         [HttpPost]
 

@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace WebApiApplication.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
+    
     public class ProjectsController : ControllerBase
     {
         private readonly BugsContext db;

@@ -1,11 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "Y3YFAXKqXEIt3hShhQ6ZVXuVn2kS5B5RpgGXODm0JsohrcqIA9xxd97OQh5bJkioNFd60xeQaO1z0bzu3+Xbpg==",
+  "dgSpecHash": "ehy8a9XJu0Y0J0dm2JxVZtx5Zvx5Vz58ADa+Fks+luUgeLazsbPhMHdR1aO8XqfXjFeKdz06YyO8hzclm+buTw==",
   "success": true,
   "projectFilePath": "C:\\Users\\chris\\source\\repos\\WebAPICore\\Core\\Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\chris\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\chris\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],
   "logs": []

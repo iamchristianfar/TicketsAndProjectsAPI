@@ -2,9 +2,11 @@ using DataStore.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,22 @@ namespace WebApiApplication
                  });
             }
             services.AddControllers();
+
+            services.AddApiVersioning(options =>
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0); 
+                options.ReportApiVersions = true;
+                //options.ApiVersionReader = new HeaderApiVersionReader("X-API-Version");
+
+            });
+
+            services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
+
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "My Web API v1", Version = "version 1" });
+                options.SwaggerDoc("v2", new OpenApiInfo { Title = "My Web API v2", Version = "version 2" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +63,15 @@ namespace WebApiApplication
 
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
+
+                // Configure OpenAPI / Swagger
+                app.UseSwagger();
+                app.UseSwaggerUI(
+                    options =>
+                    {
+                        options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1");
+                        options.SwaggerEndpoint("/swagger/v2/swagger.json", "WebAPI v2");
+                    });
             }
 
             app.UseRouting();
